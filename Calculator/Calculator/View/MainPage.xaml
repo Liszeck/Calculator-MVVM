@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator.MainPage"
+             xmlns:ViewModel="clr-namespace:Calculator.ViewModel;assembly=Calculator"
+             xmlns:behaviors1="http://xamarin.com/schemas/2020/toolkit">
+
+
+    <ContentPage.BindingContext>
+        <ViewModel:Methods>
+            </ViewModel:Methods>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android" Value="20, 20" > </On>
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="infostyle" TargetType="Button">
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="BackgroundColor" Value="Green"/>
+            </Style>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <Style x:Key="topstyle" TargetType="Button">
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="BackgroundColor" Value="Green"/>
+            </Style>
+        </ResourceDictionary>
+        <ResourceDictionary>
+                <Style x:Key="rightstyle" TargetType="Button">
+                    <Setter Property="WidthRequest" Value="60"/>
+                    <Setter Property="HeightRequest" Value="60"/>
+                    <Setter Property="TextColor" Value="White"/>
+                    <Setter Property="FontSize" Value="25"/>
+                    <Setter Property="BorderColor" Value="Black"/>
+                    <Setter Property="BorderWidth" Value="1"/>
+                    <Setter Property="BackgroundColor" Value="Red"/>
+                </Style>
+            </ResourceDictionary>
+        <ResourceDictionary>
+            <Style x:Key="resultstyle" TargetType="Button">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="38"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <Style x:Key="entrystyle" TargetType="Button">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Pink"/>
+                <Setter Property="FontSize" Value="38"/>
+            </Style>
+        </ResourceDictionary>
+
+
+    </ContentPage.Resources>
+
+    <Grid Padding="0, 0" RowSpacing="10" ColumnSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ContentView Padding="0, 0, 20, 0" Margin="0, 0, 0, 10" Grid.ColumnSpan="4" BackgroundColor="Brown">
+            <Label x:Name="resultText" Text="{Binding Label_Output}" Style="{StaticResource resultstyle}">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="Android">
+                        </On>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+        </ContentView>
+
+        <ContentView Padding="0, 0, 20, 0" Margin="0, 0, 0, 10" Grid.ColumnSpan="4" BackgroundColor="Brown" Grid.Row="1">
+            
+            <Entry x:Name="entryText" Text="{Binding Entry_Input}" Keyboard="Numeric" Style="{StaticResource entrystyle}"/>
+            
+        </ContentView>
+
+        <Button Text="C" x:Name="btnClear" Grid.Column="0" Grid.Row="2" Style="{StaticResource topstyle}" Command="{Binding Command_Clear}"/>
+        <Button Grid.Column="1" Grid.Row="2" Text="⎚" Style="{StaticResource topstyle}" Command="{Binding Command_Delete}"/>
+        <Button Text="/" Grid.Column="2" Grid.Row="2" CommandParameter="/" Style="{StaticResource topstyle}" Command= "{Binding Command_AddOperator}"/>
+        <Button Text="⤓" Grid.Column="3" Grid.Row="2" Style="{StaticResource rightstyle}" Command="{Binding Command_Save}" />
+
+        <Button Text="7" Grid.Column="0" Grid.Row="3" CommandParameter="7" Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}"/>
+        <Button Text="8" Grid.Column="1" Grid.Row="3" CommandParameter="8" Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}"/>
+        <Button Text="9" Grid.Column="2" Grid.Row="3" CommandParameter="9" Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}"/>
+        <Button Text="*" Grid.Column="3" Grid.Row="3" CommandParameter="*" Style="{StaticResource rightstyle}" Command="{Binding Command_AddOperator}"/>
+
+        <Button Text="4" Grid.Column="0" Grid.Row="4" CommandParameter="4" Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}"/>
+        <Button Text="5" Grid.Column="1" Grid.Row="4" CommandParameter="5" Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}"/>
+        <Button Text="6" Grid.Column="2" Grid.Row="4" CommandParameter="6" Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}"/>
+        <Button Text="-" Grid.Column="3" Grid.Row="4" CommandParameter="-" Style="{StaticResource rightstyle}" Command="{Binding Command_AddOperator}"/>
+
+        <Button Text="1" Grid.Column="0" Grid.Row="5" CommandParameter="1" Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}"/>
+        <Button Text="2" Grid.Column="1" Grid.Row="5" CommandParameter="2" Style="{StaticResource infostyle}" Command="{Binding Command_AddNumber}"/>
+        <Button Text="3" Grid.Column="2" Grid.Row="5" CommandParameter="3" Style="{StaticResource infostyle}" Command="{Binding Command_AddNumber}"/>
+        <Button Text="+" Grid.Column="3" Grid.Row="5" Grid.RowSpan="2" CommandParameter="+" Style="{StaticResource rightstyle}" Command="{Binding Command_AddOperator}"/>
+
+        <Button Text="." Grid.Column="0" Grid.Row="6" CommandParameter="." Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}"/>
+        <Button Text="0" Grid.Column="1" Grid.Row="6" CommandParameter="0" Style="{StaticResource infostyle}" Command= "{Binding Command_AddNumber}" />
+
+
+        <Label  Text="{Binding ClickCount, StringFormat='{0} clicks'}" />
+
+        <Button x:Name="btnEqual" Text="=" Grid.Column="2" Grid.Row="6" Style="{StaticResource infostyle}">
+            <Button.Behaviors>
+                <behaviors1:EventToCommandBehavior EventName="Clicked" Command="{Binding ClickCommand}"/>
+            </Button.Behaviors>
+        </Button>
+
+
+
+    </Grid>
+    
+    <!--<StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
+        <Label FontSize="16" Padding="30,24,30,0">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Learn more at "/>
+                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </StackLayout>-->
+
+</ContentPage>
